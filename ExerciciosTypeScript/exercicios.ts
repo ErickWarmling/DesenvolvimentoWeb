@@ -90,3 +90,76 @@ const pessoas : Pessoa[] = [
 for (const pessoa of pessoas) {
     console.log(`Nome: ${pessoa.nome}, idade: ${pessoa.idade}, cidade: ${pessoa.cidade}`);
 }
+
+// Exercício 10
+class Person {
+    nome : string;
+    idade : number;
+
+    constructor(nome : string, idade : number) {
+        this.nome = nome;
+        this.idade = idade;
+    }
+
+    imprimirDetalhes() : void {
+        console.log(`Nome: ${this.nome}, Idade: ${this.idade}`);
+    }
+}
+
+// Exercício 11
+class Student extends Person {
+    nota : number;
+
+    constructor(nome : string, idade : number, nota : number) {
+        super(nome, idade);
+        this.nota = nota;
+    }
+
+    imprimirDetalhes(): void {
+        console.log(`Nome: ${this.nome}, Idade: ${this.idade}, Nota: ${this.nota}`);
+    }
+}
+
+// Exercício 12
+let pessoa1 : Person = new Person('Erick Augusto Warmling', 20);
+let estudante1 : Student = new Student('Carla Warmling', 25, 10);
+
+pessoa1.imprimirDetalhes();
+estudante1.imprimirDetalhes();
+
+// Exercício 13
+interface Shapes {
+    calcularArea() : number;
+}
+
+class Retangulo implements Shapes {
+    private base : number;
+    private altura : number;
+
+    constructor(base : number, altura : number) {
+        this.base = base;
+        this.altura = altura;
+    }
+
+    calcularArea(): number {
+        return this.base * this.altura;
+    }
+}
+
+class Circulo implements Shapes{
+    private raio : number;
+
+    constructor(raio : number) {
+        this.raio = raio;
+    }
+
+    calcularArea(): number {
+        return Math.PI * (this.raio ** 2);
+    }
+}
+
+const retangulo = new Retangulo(5, 4);
+console.log('Área do Retângulo: ', retangulo.calcularArea());
+
+const circulo = new Circulo(6);
+console.log('Área do Círculo: ', circulo.calcularArea());
