@@ -133,8 +133,9 @@ interface Shapes {
 }
 
 class Retangulo implements Shapes {
-    private base : number;
-    private altura : number;
+    
+    base : number;
+    altura : number;
 
     constructor(base : number, altura : number) {
         this.base = base;
@@ -147,7 +148,8 @@ class Retangulo implements Shapes {
 }
 
 class Circulo implements Shapes{
-    private raio : number;
+    
+    raio : number;
 
     constructor(raio : number) {
         this.raio = raio;
