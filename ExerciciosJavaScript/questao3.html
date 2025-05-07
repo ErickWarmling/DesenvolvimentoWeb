@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão 3</title>
+</head>
+<body>
+    <h1>Registro de Contato</h1>
+    <form id="registro_contato" onsubmit="return validarRegistroContato()">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome">
+        <label for="telefone">Telefone:</label>
+        <input type="text" name="telefone" id="telefone">
+        <label for="email">E-mail:</label>
+        <input type="text" name="email" id="email">
+        <button id="botaoSalvar">Salvar</button>
+    </form>
+</body>
+<script>
+    function validarRegistroContato() {
+        let nome = document.getElementById('nome').value.trim();
+        let nomeRegex = /^[A-Z][a-z]+(?: [A-Z][a-z]+)*$/;
+        if (nome === "" || nome.length <= 3 || !nomeRegex.test(nome)) {
+            alert("Informe um nome válido");
+            return false;
+        }
+
+        let telefone = document.getElementById('telefone').value.trim();
+        let telefoneRegex = /^\d{5}-\d{4}$/;
+        if (telefone === "" || !telefoneRegex.test(telefone)) {
+            alert("Informe um telefone válido");
+            return false;
+        }
+
+        let email = document.getElementById('email').value.trim(); 
+        let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (email === "" || !emailRegex.test(email)) {
+            alert("Informe um e-mail válido");
+            return false;
+        }
+
+        alert("Contato registrado com sucesso");
+        return true;
+    }
+</script>
+</html>
