@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão HTML</title>
+</head>
+<body>
+    <h1><a href="http://www.google.com.br">Bem-vindo ao Google</a></h1>
+
+    <ol>
+        <li>Desenvolvimento Web</li>
+        <li>Programação Orientado a Objetos</li>
+        <li>Banco de Dados</li>
+        <li>Padrões de Projeto</li>
+        <li>Cálculo Diferencial e Integral</li>
+    </ol>
+
+    <h2>Registro de Usuário</h2>
+    <form id="registro_usuario">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome">
+        <label for="email">E-mail:</label>
+        <input type="text" name="email" id="email">
+        <label for="mensagem">Mensagem:</label>
+        <input type="text" name="Mensagem" id="mensagem">
+        <button id="botaoEnviar">Enviar</button>
+    </form>
+    
+    <p id="resultadoEnvio"></p>
+</body>
+<script>
+    document.getElementById('botaoEnviar').addEventListener('click', function(event) {
+        event.preventDefault(); // Impede o carregamento da página
+        let resultado = "Formulário Enviado";
+        document.getElementById('resultadoEnvio').innerText = resultado;
+    });
+</script>
+</html>
