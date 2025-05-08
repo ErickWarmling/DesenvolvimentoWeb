@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão 1</title>
+</head>
+<style>
+    #cabecalho {
+        background-image: url(/images/icone-agenda.png);
+        background-size: 150px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-color: aquamarine;
+        height: 150px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #cabecalho h1 {
+        font-size: 20px;
+    }
+
+    nav {
+        height: 30px;
+        background-color: lightblue;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: space-around;
+    }
+</style>
+<body>
+    <!-- Utilizei o elemento semântico header para criar um cabeçalho -->
+    <header>
+        <div id="cabecalho">
+            <h1>Bem-vindo ao meu primeiro site</h1>
+        </div>
+    </header>
+
+    <!-- Utilizei o elemento semântico nav para criar uma barra de navegação -->
+    <nav>
+        <a href="inicio">Início</a>
+        <a href="sobre">Sobre</a>
+        <a href="usuarios">Usuários</a>
+        <a href="informacoes">Informações</a>
+        <a href="contato">Contato</a>
+    </nav>
+
+    <!-- Utilizei o elemento semântico p para criar um paragráfo -->
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium repellendus accusamus ad! Corrupti facere et consectetur? Nulla, iste excepturi distinctio qui quasi deserunt cum natus, asperiores sunt esse quae facere!</p>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus libero consectetur consequatur ducimus tempore aperiam, nihil explicabo expedita alias ea ullam, esse adipisci dolore maxime dicta assumenda veniam ratione magnam.</p>
+
+    <!-- Utilizei um elemento semântico ol para criar uma lista ordenada -->
+    <ol>
+        <li>Programação</li>
+        <li>Desenvolvimento Web</li>
+        <li>Cálculo</li>
+        <li>Padrões de Projeto</li>
+        <li>Testes de Software</li>
+    </ol>
+
+    <!-- Utilizei o elemento semântico h2 para criar um título -->
+    <h2>Contato</h2>
+    <!-- Utilizei o elemento semântico form para criar um formulário -->
+    <form id="contato">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome">
+        <label for="email">E-mail:</label>
+        <input type="text" name="email">
+        <label for="mensagem">Mensagem:</label>
+        <input type="text" name="mensagem">
+    </form>
+
+    <h2>Registro de Usuários</h2>
+    <form id="registro-usuario" onsubmit="return validarRegistroUsuario()">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" id="nome">
+        <label for="senha">Senha:</label>
+        <input type="password" name="senha" id="senha">
+        <label for="confirmacao-senha">Confirmação de senha:</label>
+        <input type="password" name="confirmacao-senha" id="confirmacao-senha">
+        <label for="email">E-mail:</label>
+        <input type="text" name="email" id="email">
+        <label for="pais">País:</label>
+        <select name="pais" id="pais">
+            <option value="" disabled selected>Selecione um país</option>
+            <option value="pais1">Alemanha</option>
+            <option value="pais2">Brasil</option>
+            <option value="pais3">Canadá</option>
+            <option value="pais4">Estados Unidos</option>
+            <option value="pais5">França</option>
+            <option value="pais6">Itália</option>
+        </select>
+        <button type="submit" id="botaoEnviar">Enviar</button>
+    </form>
+</body>
+<script>
+    function validarRegistroUsuario() {
+
+        let nome = document.getElementById('nome').value.trim();
+        if (nome === "" || nome.length < 3) {
+            alert("Informe um nome válido");
+            return false;
+        }
+        
+        let senha = document.getElementById('senha').value.trim();
+        if (senha === "" || senha.length < 5) {
+            alert("Informe uma senha válida");
+            return false;
+        }
+
+        let confirmacaoSenha = document.getElementById('confirmacao-senha').value.trim();
+        if (senha !== confirmacaoSenha) {
+            alert("As senhas são diferentes");
+            return false;
+        }
+
+        let email = document.getElementById('email').value.trim();
+        let emailRegex = /^[a-z0-9\.]+@[a-z0-9]+\.com$/;
+        if(!emailRegex.test(email)) {
+            alert("O e-mail é inválido");
+            return false;
+        }
+
+        let pais = document.getElementById('pais').value.trim();
+        if (pais === "") {
+            alert("Selecione um país");
+            return false;
+        }
+
+        alert("Usuário registrado com sucesso!")
+        return true;
+    }
+
+    let emails = [];
+    document.getElementById('botaoEnviar').addEventListener('click', function (event) {
+        let email = document.getElementById('email').value;
+
+        if (email === "") {
+            onsole.log("O e-mail não foi informado");
+            return false;
+        }
+
+        console.log(email);
+        emails.push(email);
+    });
+</script>
+</html>
