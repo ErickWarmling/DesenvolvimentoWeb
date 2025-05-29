@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAutCtx } from "./AutProvider";
 
 export default function Login() {
     const [usuario, setUsuario] = useState('');
@@ -16,16 +17,12 @@ export default function Login() {
         setSenha(evento.target.value);
     }
 
+    const autCtx = useAutCtx();
+
     function loginHandler() {
-        if(usuario === 'admin' && senha === '1234') {
-            console.log('Login efetuado com sucesso...');
-            setLoginSucesso(true);
-            setLoginFalhou(false);
-            navigate(`/inicio/${usuario}`);
-        } else {
-            console.log('Falhou');
-            setLoginFalhou(true);
-            setLoginSucesso(false);
+        const foiAutenticado = autCtx.autenticar(usuario, senha);
+        if (foiAutenticado) {
+            navigate(`/inicio/${usuario}`)
         }
     }
 
