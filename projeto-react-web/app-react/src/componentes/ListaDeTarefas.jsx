@@ -1,9 +1,17 @@
+import { useEffect } from "react";
+
 export default function ListaDeTarefas() {
-    const tarefas = [
-        {id: 1, descricao: 'Aprender React', concluido: false},
-        {id: 2, descricao: 'Aprender Rest APIs', concluido: false},
-        {id: 3, descricao: 'Desenvovler uma aplicação', concluido: false},
-    ]
+    const [tarefas, setTarefas] = useState([]);
+
+    useEffect(() => atualizarTarefas(), []);
+    function atualizarTarefas() {
+        obterTarefasApi('admin')
+            .then(resposta => {
+                console.log(resposta)
+                setTarefas(resposta.data)
+            })
+            .catch(erro => console.log(erro))
+    }
 
     return (
         <div className="container">
