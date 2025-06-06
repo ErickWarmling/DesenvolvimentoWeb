@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { obterTarefasApi } from "../api/obterTarefa";
 
 export default function ListaDeTarefas() {
     const [tarefas, setTarefas] = useState([]);
@@ -31,7 +32,7 @@ export default function ListaDeTarefas() {
                                 <tr key={tarefa.id}>
                                     <td>{tarefa.id}</td>
                                     <td>{tarefa.descricao}</td>
-                                    <td>{tarefa.concluido.toString()}</td>
+                                    <td>{tarefa.foiConcluido.toString()}</td>
                                 </tr>
                             )
                         )}
