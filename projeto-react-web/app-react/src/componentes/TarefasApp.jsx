@@ -8,6 +8,7 @@ import Login from "./Login";
 import "./TarefasApp.css"
 import Logout from "./Logout";
 import AutProvider, { useAutCtx } from "./AutProvider";
+import Tarefa from "./Tarefa";
 
 function AuthenticatedRoute({children}) {
     const autCtx = useAutCtx();
@@ -34,6 +35,11 @@ export default function TarefasApp() {
                         </Route>
                         <Route path='*' element={<Erro />}></Route>
                         <Route path='/tarefas' element={<ListaDeTarefas />}></Route>
+                        <Route path='/tarefas/:id' element={
+                            <AuthenticatedRoute>
+                                <Tarefa />
+                            </AuthenticatedRoute>
+                        }></Route>
                         <Route path="/sair" element={<Logout />}></Route>
                     </Routes>
                     <Rodape />

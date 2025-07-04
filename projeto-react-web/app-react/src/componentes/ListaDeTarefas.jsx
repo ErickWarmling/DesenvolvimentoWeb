@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { obterTarefasApi } from "../api/obterTarefa";
+import { FaTrashAlt, FaEdit } from 'react-icons/fa';
+import { excluirTarefasApi } from "../api/excluirTarefas";
 
 export default function ListaDeTarefas() {
     const [tarefas, setTarefas] = useState([]);
@@ -12,6 +15,22 @@ export default function ListaDeTarefas() {
                 setTarefas(resposta.data)
             })
             .catch(erro => console.log(erro))
+    }
+
+    function excluirTarefa(id) {
+        console.log('Excluir: ' + id);
+        excluirTarefasApi('admin', id)
+        .then(() => {
+            setMensagem(`Tarefa ${id} excluída com sucesso!`)
+            atualizarTarefas()
+        })
+        .catch(erro => console.log(erro))
+    }
+
+    const navigate = useNavigate();
+    function visualizarTarefa(id) {
+        console.log('Visualizar: ' + id);
+        navigate(`/tarefas/${id}`)
     }
 
     return (
@@ -33,6 +52,12 @@ export default function ListaDeTarefas() {
                                     <td>{tarefa.id}</td>
                                     <td>{tarefa.descricao}</td>
                                     <td>{tarefa.foiConcluido.toString()}</td>
+                                    <td><button className="btn btn-danger" onClick={
+                                        () => excluirTarefa(tarefa.id)}><FaTrashAlt /></button>
+                                    </td>
+                                    <td><button className="btn btn-sucess" onClick={
+                                        () => visualizarTarefa(tarefa.id) }><FaEdit /></button>
+                                    </td>
                                 </tr>
                             )
                         )}
