@@ -26,6 +26,13 @@ public class Usuario {
 	
 	@Size(min=3, message="O nome deve conter apenas 3 letras!")
 	private String nome;
+
+	@Size(min=1)
+	@NotNull
+	private String senha;
+
+	@NotNull
+	private String salt;
 	
 	@OneToMany(mappedBy="usuario")
 	@JsonIgnore
@@ -67,6 +74,22 @@ public class Usuario {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	@Override

@@ -4,13 +4,10 @@ import java.net.URI;
 import java.util.List;
 
 import java.util.Optional;
+
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import dsw.projeto_rest.jpa.PostagemRepository;
@@ -109,5 +106,23 @@ public class UsuarioResource {
 	 	
 	}
 	
-	
+	@PutMapping("/users/{username}/tarefas/{id}")
+	public ResponseEntity<Object> alterarTarefa(@PathVariable String username, @Valid @RequestBody Tarefa tarefa) {
+		Optional<Usuario> usuario = usuarioRepository.findByUsuario(username);
+		tarefa.setUsuario(usuario.get());
+		Tarefa tarefaSalva = tarefaRepository.save(tarefa);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(tarefaSalva.getId()).toUri();
+		return ResponseEntity.created(location).build();
+	}
+
+	@PostMapping("/autenticar")
+	public Boolean autenticar(@RequestBody Credencial credencial) {
+		System.out.println(credencial.getUsername() + " " + credencial.getSenha());
+		Optional<Usuario> usuario = usuarioRepository.findByUsuarioAndSenha(credencial.getUsername(), credencial.getSenha());
+		if (!usuario.isEmpty()) {
+			boolean senha = BCrypt.checkpw(credencial.getSenha(), usuario.get().getSenha());
+			return senha;
+		}
+		return false;
+	}
 }

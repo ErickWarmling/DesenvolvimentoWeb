@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+import { autenticarApi } from "../api/tarefas";
 
 export const AutCtx = createContext();
 export const useAutCtx = () => useContext(AutCtx);
@@ -7,8 +8,12 @@ export default function AutProvider({ children }) {
     const [autenticado, setAutenticado] = useState(false);
     const [usuario, setUsuario] = useState(null);
 
-    function autenticar(usuario, senha) {
-        if (usuario === 'admin' && senha === '1234') {
+    async function autenticar(usuario, senha) {
+        const credencial = {"usuario:": usuario, "senha": senha};
+        const resposta = await autenticarApi(credencial);
+        const foiAutenticado = resposta.data;
+        
+        if (foiAutenticado) {
             setAutenticado(true);
             setUsuario(usuario);
             return true;

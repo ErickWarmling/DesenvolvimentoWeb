@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { obterTarefasApi } from "../api/obterTarefa";
+import { obterTarefasApi, excluirTarefasApi } from "../api/tarefas";
 import { FaTrashAlt, FaEdit } from 'react-icons/fa';
-import { excluirTarefasApi } from "../api/excluirTarefas";
 
 export default function ListaDeTarefas() {
     const [tarefas, setTarefas] = useState([]);
@@ -33,10 +32,17 @@ export default function ListaDeTarefas() {
         navigate(`/tarefas/${id}`)
     }
 
+    function adicionarTarefa() {
+        navigate(`/tarefas/-1`)
+    }
+
     return (
         <div className="container">
             <h1>Tarefas</h1>
             <div>
+                <div className="btn btn-sucess m-5" onClick={adicionarTarefa}>
+                    Nova Tarefa
+                </div>
                 <table className="table">
                     <thead>
                         <tr>
